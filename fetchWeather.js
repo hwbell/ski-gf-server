@@ -1,7 +1,9 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
 
-fetch("https://api.openweathermap.org/data/2.5/forecast?id=524901&APPID&APPID=eef8b0df2136b2a17532672c7ac59717")
+const zip = '80227'
+fetch("https://api.openweathermap.org/data/2.5/forecast?zip=80227,US&APPID&APPID=eef8b0df2136b2a17532672c7ac59717")
+             //api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}
   .then(function(response) {
     return response.json();
   })
