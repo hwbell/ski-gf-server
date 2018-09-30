@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var weather = require('./routes/weather');
 var snow = require('./routes/snow');
+var port = process.env.PORT || 3000;
 
 var app = express();
 
@@ -55,5 +56,9 @@ app.use(function(err, req, res, next) {
     });
 });
 
+
+app.listen(port, () => {
+    console.log(`Started up at port ${port}`);
+})
 
 module.exports = app;
