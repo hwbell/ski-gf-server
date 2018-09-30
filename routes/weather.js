@@ -5,7 +5,7 @@ var weatherData = require('../public/json/weatherData.json');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.send(weatherData);
+  res.send(JSON.stringify(weatherData));
 });
 
 module.exports = router;
