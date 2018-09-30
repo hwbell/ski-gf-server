@@ -5,7 +5,7 @@ var snowData = require('../public/json/snowData.json');
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-  res.send(JSON.stringify(snowData));
+  res.send((snowData));
 });
 
 module.exports = router;
