@@ -47,7 +47,7 @@ scrape().then((data) => {
   
   var writeData = JSON.stringify(data);
 
-  fs.writeFile('./public/json/resortData.json', writeData, (err) => {
+  fs.writeFile('./public/json/snowData.json', writeData, (err) => {
     console.log(err);
   });
   
