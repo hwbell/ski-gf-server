@@ -7,19 +7,26 @@ var bodyParser = require('body-parser');
 
 var weatherPage = require('./routes/weather');
 var snowPage = require('./routes/snow');
-var port = process.env.PORT || 3000;
+var trafficPage = require('./routes/traffic');
 
 var weather = require('./fetchWeather.js');
 var resort = require('./scrapeResortData.js')
+var traffic = require('./scrapeTrafficData.js')
 
+var port = process.env.PORT || 3000;
 var app = express();
 
-//update data for weather and snow forecast every 30 mins
-intervalTime = 60 * 30 * 1000; // 30 mins in milliseconds
+// Get data once on startup and then update data every 60 mins
+weather.updateWeatherInfo();
+resort.updateSnowInfo();
+traffic.updateTrafficInfo();
+
+intervalTime = 60 * 60 * 1000; // 60 mins in milliseconds
 let dataInterval = setInterval(() => {
 	weather.updateWeatherInfo();
 	resort.updateSnowInfo();
-}, 5000);
+	traffic.updateTrafficInfo();
+}, intervalTime);
 
 
 // view engine setup
@@ -39,6 +46,7 @@ console.log(`__dirname: ${__dirname}`);
 
 app.use('/weather', weatherPage);
 app.use('/snow', snowPage);
+app.use('/traffic', trafficPage);
 
 /// catch 404 and forwarding to error handler
 app.use(function (req, res, next) {
