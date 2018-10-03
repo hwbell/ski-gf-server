@@ -2,6 +2,12 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
 
+// define the promise for scraping the data from keystone/abasin websites, since
+// there isnt an api to use. probably will have to change this as they modify 
+// the websites fairly often, it seems
+
+// below, save the data
+
 const updateSnowInfo = () => {
   let scrape = async () => {
     const browser = await puppeteer.launch({ headless: true });
@@ -43,6 +49,10 @@ const updateSnowInfo = () => {
     })
   }
 
+  // Once we have the data, save it to a local json file on the server. if 
+  // one is present with the same name, it just gets replaced, so there isnt
+  // a data buildup.
+  
   scrape().then((data) => {
     console.log("Got snow info from Keystone + A Basin"); // Success!
 
