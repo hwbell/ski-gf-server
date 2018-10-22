@@ -67,6 +67,8 @@ const updateSnowInfo = () => {
   });
 }
 
+updateSnowInfo();
+
 module.exports = {
   updateSnowInfo
 }
