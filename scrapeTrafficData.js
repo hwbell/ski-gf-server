@@ -10,7 +10,7 @@ const path = require('path');
 
 const updateTrafficInfo = () => {
   let scrape = async () => {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({args: ['--no-sandbox'], headless: true });
     const page = await browser.newPage();
 
     await page.goto('https://goi70.com/travel/');
