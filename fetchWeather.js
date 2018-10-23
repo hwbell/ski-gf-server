@@ -31,6 +31,8 @@ const updateWeatherInfo = () => {
   //
 }
 
+updateWeatherInfo();
+
 module.exports = {
   updateWeatherInfo
 }
