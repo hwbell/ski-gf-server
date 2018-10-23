@@ -21,7 +21,7 @@ weather.updateWeatherInfo();
 resort.updateSnowInfo();
 traffic.updateTrafficInfo();
 
-const intervalTime = 0.5 * 60 * 1000; // 0.5 mins in milliseconds
+const intervalTime = 60 * 60 * 1000; // 0.5 mins in milliseconds
 let dataInterval = setInterval(() => {
 	weather.updateWeatherInfo();
 	resort.updateSnowInfo();
