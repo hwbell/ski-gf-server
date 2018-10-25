@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path')
 const zip = '80227'
 
-const coords = [39.7392, -104.9848];
+const coords = [39.7392, -104.9848]; // for Denver Co
 const lat = coords[0];
 const lon = coords[1];
 
@@ -20,6 +20,7 @@ const updateWeatherInfo = () => {
     var writeData = JSON.stringify(weatherJSON);
 
     fs.writeFile(path.join(__dirname, 'public/json/weatherData.json'), writeData, (err) => {
+      console.log(`writing weather data to ${path.join(__dirname, 'public/json/weatherData.json')}`)
       if (err) { 
         console.log(`Error writing weather to JSON file: ${err}`);
       }

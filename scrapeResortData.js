@@ -59,6 +59,7 @@ const updateSnowInfo = () => {
     var writeData = JSON.stringify(data);
 
     fs.writeFile(path.join(__dirname, 'public/json/snowData.json'), writeData, (err) => {
+      console.log(`writing snow data to ${path.join(__dirname, 'public/json/snowData.json')}`);
       if (err) {
         console.log(err);
       }
