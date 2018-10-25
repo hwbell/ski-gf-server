@@ -10,6 +10,8 @@ const path = require('path');
 
 const updateSnowInfo = () => {
   let scrape = async () => {
+    const today = new Date();
+    const timeStamp = (`${today.getDate()}, ${today.getHours()}: ${today.getMinutes()}`);
     const browser = await puppeteer.launch({args: ['--no-sandbox'], headless: true });
     const page = await browser.newPage();
 
@@ -44,6 +46,7 @@ const updateSnowInfo = () => {
     browser.close();
 
     return ({
+      timeStamp,
       keystoneWeather,
       aBasinWeather
     })
