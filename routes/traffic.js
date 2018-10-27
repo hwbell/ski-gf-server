@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var trafficData = require('../public/json/trafficData.json');
+var trafficData = require('../public/json/trafficData.json') || 'waiting on data';
 
 /* GET users listing. */
 router.get('/', function(req, res) {

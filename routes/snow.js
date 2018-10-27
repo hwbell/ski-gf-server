@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var snowData = require('../public/json/snowData.json');
+var snowData = require('../public/json/snowData.json') || 'waiting on data';
 
 /* GET users listing. */
 router.get('/', function(req, res) {
