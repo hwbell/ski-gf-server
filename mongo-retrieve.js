@@ -2,7 +2,7 @@
 const { MongoClient, ObjectID } = require('mongodb');
 
 const getData = (type, callback) => {
-  MongoClient.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/SkiGfApp', (err, client) => {
+  MongoClient.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/SkiGfApp', (err, client) => {
     if (err) {
       console.log('Unable to connect to MongoDb server')
     }
