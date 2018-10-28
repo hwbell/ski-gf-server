@@ -1,11 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-var weatherData = require('../public/json/weatherData.json') || 'waiting on data';
+const db = require('../mongo-retrieve');
 
-/* GET home page. */
+currentData = db.getData('weather', (data) => {
+  console.log(`Latest weather data: ${data[data.length-1].data}`)
+  return data[data.length-1].data[0];
+});
+
+/* GET users listing. */
 router.get('/', function(req, res) {
-  res.send(weatherData);
+  res.send((currentData));
 });
 
 module.exports = router;

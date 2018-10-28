@@ -1,20 +1,34 @@
-const {MongoClient, ObjectID} = require('mongodb');
 
-MongoClient.connect('mongodb://@localhost:27017/SkiGfApp', (err, client) => {
-  if (err) {
-    console.log('Unable to connect to MongoDb server')
-  }
-  const db = client.db('SkiGfApp'); // different from video for V3
-  console.log('Connected to MongoDB server');
+const { MongoClient, ObjectID } = require('mongodb');
 
-  db.collection('SkiGfApp').find().toArray().then((docs) => {
-    console.log(`Total: ${docs.length} users found`);
-    console.log(JSON.stringify(docs, undefined, 2));
-    
-    
-  }, (err) => {
-    console.log('Unable to fetch data', err);
+const getData = (type, callback) => {
+  MongoClient.connect('mongodb://localhost:27017/SkiGfApp', (err, client) => {
+    if (err) {
+      console.log('Unable to connect to MongoDb server')
+    }
+
+    const db = client.db('SkiGfApp'); // different from video for V3
+    console.log('Connected to MongoDB server');
+
+    db.collection('SkiGfApp').find({ type }).toArray().then((docs) => {
+      console.log(`Total: ${docs.length} records found`);
+      console.log(docs[0]);
+      client.close(); // different from video for V3
+      return callback(docs)
+    }, (err) => {
+      console.log('Unable to fetch data', err);
+    });
+
   });
 
-  client.close(); // different from video for V3
+}
+
+
+data = getData('weather', (data) => {
+  console.log(`Latest snow data: ${data[data.length-1].data}`)
+  return data[0];
 });
+
+module.exports = {
+  getData
+}

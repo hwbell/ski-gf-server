@@ -50,6 +50,45 @@ const updateTrafficInfo = () => {
       }
     });
 
+    // write to mongodb instead of fs.writeFile, as fs does not 
+    // actually work on heroku.
+
+    const MongoClient = require('mongodb').MongoClient;
+
+    MongoClient.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/SkiGfApp', (err, client) => {
+      if (err) {
+        return console.log('Unable to connect to MongoDB server');
+      }
+      console.log('Connected to MongoDB server');
+      const db = client.db('SkiGfApp');
+
+      // db.collection('SkiGfApp').deleteMany({type: 'snow'}).then((result) => {
+      //   console.log(result);
+
+      // });
+
+      db.collection('SkiGfApp').insertOne({
+        type: 'traffic',
+        data: writeData,
+      }, (err, result) => {
+        if (err) {
+          console.log('Unable to insert traffic data to SkiGfApp');
+        }
+        console.log(JSON.stringify(result.ops, undefined, 2))
+      });
+
+      db.collection('SkiGfApp').find().toArray().then((docs) => {
+        console.log(`Total: ${docs.length} objects found`);
+        console.log(docs);
+
+
+      }, (err) => {
+        console.log('Unable to fetch data', err);
+      });
+
+      client.close();
+    });
+
   });
 }
 

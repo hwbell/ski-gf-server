@@ -8,7 +8,7 @@ MongoClient.connect('mongodb://localhost:27017/SkiGfApp', (err, client) => {
    const db = client.db('SkiGfApp');
    
    db.collection('SkiGfApp').insertOne({
-       text: 'Something to do',
+       type: 'snow',
        completed: false
    }, (err, result) => {
       if (err) {

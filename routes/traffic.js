@@ -1,11 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-var trafficData = require('../public/json/trafficData.json') || 'waiting on data';
+const db = require('../mongo-retrieve');
+
+currentData = db.getData('traffic', (data) => {
+  console.log(`Latest traffic data: ${data[data.length-1].data}`)
+  return data[data.length-1].data[0];
+});
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-  res.send((trafficData));
+  res.send((currentData));
 });
 
 module.exports = router;
