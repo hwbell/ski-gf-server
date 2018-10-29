@@ -48,9 +48,10 @@ const updateWeatherInfo = () => {
         data: writeData,
       }, (err, result) => {
         if (err) {
-          console.log('Unable to insert weather data to SkiGfApp');
+          console.log('Unable to insert weather data to SkiGfApp', err);
+        } else {
+          console.log(JSON.stringify(result.ops, undefined, 2));
         }
-        console.log(JSON.stringify(result.ops, undefined, 2))
       });
 
       db.collection('SkiGfApp').find().toArray().then((docs) => {
