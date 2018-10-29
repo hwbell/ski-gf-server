@@ -77,12 +77,12 @@ const updateTrafficInfo = () => {
         console.log(`Total: ${docs.length} objects found`);
         console.log(docs);
 
-
+        client.close();
+        
       }, (err) => {
         console.log('Unable to fetch data', err);
       });
 
-      client.close();
     });
 
   });

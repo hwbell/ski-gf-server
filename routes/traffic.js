@@ -5,14 +5,21 @@ const db = require('../mongo-retrieve');
 
 let dbCollection = process.env.MONGODB_URI ? 'heroku_ktdh1smp' : 'SkiGfApp';
 
-currentData = db.getData('traffic', dbCollection, (data) => {
-  console.log(`Latest traffic data: ${data[data.length-1].data}`)
-  return data[data.length-1].data;
-});
+const async = require('./asyncMiddleware');
 
-/* GET users listing. */
-router.get('/', function(req, res) {
-  res.send((currentData));
+router.get('/', (req, res) => {
+  /* 
+    if there is an error thrown in db.getData, asyncMiddleware
+    will pass it to next() and express will handle the error;
+  */
+  currentData = db.getData('traffic', dbCollection, (data) => {
+    console.log(`Latest traffic data: ${data[data.length - 1].data}`)
+    res.send(data[data.length - 1].data);
+    
+  });
+
+  
+
 });
 
 module.exports = router;

@@ -15,8 +15,11 @@ const getData = (type, dbCollection, callback) => {
     db.collection(dbStr).find({ type }).toArray().then((docs) => {
       console.log(`Total: ${docs.length} records found`);
       console.log(docs[docs.length-1]);
+      
       client.close(); // different from video for V3
-      return callback(docs)
+
+      return callback(docs);
+      
     }, (err) => {
       console.log('Unable to fetch data', err);
     });
@@ -26,10 +29,12 @@ const getData = (type, dbCollection, callback) => {
 }
 
 // to test
-// data = getData('snow', dbCollection, (data) => {
-//   console.log(`Latest snow data: ${data[data.length-1].data}`)
-//   return data[data.length-1].data;
-// });
+data = getData('snow', dbCollection, (data) => {
+  //console.log(typeof(data[data.length-1].data))
+  console.log(`Latest snow data: ${data[data.length-1].data}`)
+
+  return data[data.length-1].data;
+});
 
 module.exports = {
   getData
