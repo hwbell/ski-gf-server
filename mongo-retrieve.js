@@ -9,12 +9,12 @@ const getData = (type, dbCollection, callback) => {
       console.log('Unable to connect to MongoDb server')
     }
 
-    const db = client.db(dbCollection); // different from video for V3
-    console.log('Connected to MongoDB server');
+    let dbStr = process.env.MONGODB_URI ? 'heroku_ktdh1smp' : 'SkiGfApp';
+    const db = client.db(dbStr);
 
-    db.collection(dbCollection).find({ type }).toArray().then((docs) => {
+    db.collection(dbStr).find({ type }).toArray().then((docs) => {
       console.log(`Total: ${docs.length} records found`);
-      console.log(docs[0]);
+      console.log(docs[docs.length-1]);
       client.close(); // different from video for V3
       return callback(docs)
     }, (err) => {
@@ -25,10 +25,11 @@ const getData = (type, dbCollection, callback) => {
 
 }
 
-data = getData('snow', dbCollection, (data) => {
-  console.log(`Latest snow data: ${data[data.length-1].data}`)
-  return data[0];
-});
+// to test
+// data = getData('snow', dbCollection, (data) => {
+//   console.log(`Latest snow data: ${data[data.length-1].data}`)
+//   return data[data.length-1].data;
+// });
 
 module.exports = {
   getData

@@ -55,7 +55,7 @@ const updateWeatherInfo = () => {
         }
       });
 
-      db.collection('SkiGfApp').find().toArray().then((docs) => {
+      db.collection(dbStr).find().toArray().then((docs) => {
         console.log(`Total: ${docs.length} objects found`);
         console.log(docs);
 
