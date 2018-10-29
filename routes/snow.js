@@ -3,7 +3,9 @@ var router = express.Router();
 
 const db = require('../mongo-retrieve');
 
-currentData = db.getData('snow', (data) => {
+let dbCollection = process.env.MONGODB_URI ? 'heroku_ktdh1smp' : 'SkiGfApp';
+
+currentData = db.getData('snow', dbCollection, (data) => {
   console.log(`Latest snow data: ${data[data.length-1].data}`)
   return data[data.length-1].data[0];
 });
