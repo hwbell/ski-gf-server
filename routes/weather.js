@@ -10,7 +10,7 @@ currentData = db.getData('weather', (data) => {
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-  res.send((currentData));
+  res.send({});
 });
 
 module.exports = router;
