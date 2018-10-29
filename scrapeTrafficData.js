@@ -60,14 +60,10 @@ const updateTrafficInfo = () => {
         return console.log('Unable to connect to MongoDB server');
       }
       console.log('Connected to MongoDB server');
-      const db = client.db('SkiGfApp');
+      let dbStr = process.env.MONGODB_URI ? 'heroku_ktdh1smp' : 'SkiGfApp';
+      const db = client.db(dbStr);
 
-      // db.collection('SkiGfApp').deleteMany({type: 'snow'}).then((result) => {
-      //   console.log(result);
-
-      // });
-
-      db.collection('SkiGfApp').insertOne({
+      db.collection(dbStr).insertOne({
         type: 'traffic',
         data: writeData,
       }, (err, result) => {
