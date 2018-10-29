@@ -1,6 +1,8 @@
 
 const { MongoClient, ObjectID } = require('mongodb');
 
+let dbCollection = process.env.MONGODB_URI ? 'heroku_ktdh1smp' : 'SkiGfApp';
+
 const getData = (type, dbCollection, callback) => {
   MongoClient.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/SkiGfApp', (err, client) => {
     if (err) {
@@ -22,8 +24,6 @@ const getData = (type, dbCollection, callback) => {
   });
 
 }
-
-let dbCollection = process.env.MONGODB_URI ? 'heroku_ktdh1smp' : 'SkiGfApp';
 
 data = getData('snow', dbCollection, (data) => {
   console.log(`Latest snow data: ${data[data.length-1].data}`)
