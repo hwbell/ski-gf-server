@@ -8,7 +8,7 @@ const lat = coords[0];
 const lon = coords[1];
 
 const updateWeatherInfo = () => {
-  fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID&APPID=eef8b0df2136b2a17532672c7ac59717`)
+  fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=80227&APPID=eef8b0df2136b2a17532672c7ac59717`)
              //api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}
   .then(function(response) {
     return response.json();
