@@ -40,8 +40,8 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-console.log(`path: ${path}`);
-console.log(`__dirname: ${__dirname}`);
+// console.log(`path: ${path}`);
+// console.log(`__dirname: ${__dirname}`);
 
 
 app.use('/weather', weatherPage);

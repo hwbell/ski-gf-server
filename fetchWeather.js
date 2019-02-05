@@ -19,12 +19,12 @@ const updateWeatherInfo = () => {
   
     var writeData = JSON.stringify(weatherJSON);
 
-    fs.writeFile(path.join(__dirname, 'public/json/weatherData.json'), writeData, (err) => {
-      console.log(`writing weather data to ${path.join(__dirname, 'public/json/weatherData.json')}`)
-      if (err) { 
-        console.log(`Error writing weather to JSON file: ${err}`);
-      }
-    })
+    // fs.writeFile(path.join(__dirname, 'public/json/weatherData.json'), writeData, (err) => {
+    //   console.log(`writing weather data to ${path.join(__dirname, 'public/json/weatherData.json')}`)
+    //   if (err) { 
+    //     console.log(`Error writing weather to JSON file: ${err}`);
+    //   }
+    // })
 
     // write to mongodb instead of fs.writeFile, as fs does not 
     // actually work on heroku.
@@ -57,7 +57,7 @@ const updateWeatherInfo = () => {
 
       db.collection(dbStr).find().toArray().then((docs) => {
         console.log(`Total: ${docs.length} objects found`);
-        console.log(docs);
+        // console.log(docs);
 
         client.close();
         

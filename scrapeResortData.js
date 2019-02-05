@@ -61,12 +61,12 @@ const updateSnowInfo = () => {
 
     var writeData = JSON.stringify(data);
 
-    fs.writeFile(path.join(__dirname, 'public/json/snowData.json'), writeData, (err) => {
-      console.log(`writing snow data to ${path.join(__dirname, 'public/json/snowData.json')}`);
-      if (err) {
-        console.log(err);
-      }
-    });
+    // fs.writeFile(path.join(__dirname, 'public/json/snowData.json'), writeData, (err) => {
+    //   console.log(`writing snow data to ${path.join(__dirname, 'public/json/snowData.json')}`);
+    //   if (err) {
+    //     console.log(err);
+    //   }
+    // });
 
     // write to mongodb instead of fs.writeFile, as fs does not 
     // actually work on heroku.
@@ -93,7 +93,7 @@ const updateSnowInfo = () => {
 
       db.collection('SkiGfApp').find().toArray().then((docs) => {
         console.log(`Total: ${docs.length} objects found`);
-        console.log(docs);
+        // console.log(docs);
 
         client.close();
         

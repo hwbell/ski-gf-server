@@ -14,12 +14,12 @@ const updateTrafficInfo = () => {
     const page = await browser.newPage();
 
     await page.goto('https://goi70.com/travel/');
-    await page.click('.main-content');
+    await page.click('.ccm-custom-style-fullscalearea2-636');
     await page.waitFor(1000);
     //await page.waitForSelector('.grid twelve');
 
     const traffic = await page.evaluate(() => {
-      let weekendTraffic = document.querySelector('.main-content').innerText;
+      let weekendTraffic = document.querySelector('.ccm-custom-style-fullscalearea2-636').innerText;
 
       return {
         weekendTraffic: weekendTraffic.split('\n')
@@ -44,11 +44,11 @@ const updateTrafficInfo = () => {
 
     var writeData = JSON.stringify(data);
 
-    fs.writeFile(path.join(__dirname, 'public/json/trafficData.json'), writeData, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
+    // fs.writeFile(path.join(__dirname, 'public/json/trafficData.json'), writeData, (err) => {
+    //   if (err) {
+    //     console.log(err);
+    //   }
+    // });
 
     // write to mongodb instead of fs.writeFile, as fs does not 
     // actually work on heroku.
@@ -75,7 +75,7 @@ const updateTrafficInfo = () => {
 
       db.collection('SkiGfApp').find().toArray().then((docs) => {
         console.log(`Total: ${docs.length} objects found`);
-        console.log(docs);
+        //console.log(docs);
 
         client.close();
         
