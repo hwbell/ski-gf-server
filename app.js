@@ -9,15 +9,30 @@ var weatherPage = require('./routes/weather');
 var snowPage = require('./routes/snow');
 var trafficPage = require('./routes/traffic');
 
-var weather = require('./fetchWeather.js');
+var weather = require('./fetchDarkSkyWeather.js');
 var resort = require('./scrapeResortData.js')
 var traffic = require('./scrapeTrafficData.js')
 
 var port = process.env.PORT || 3000;
 var app = express();
 
+// locations are for darksky weather api, add more later?
+const denver = {
+  name: 'Denver',
+  lat: 39.7392,
+  long: -104.9848
+};
+
+const silverthorne = {
+  name: 'Silverthorne',
+  lat: 39.6296,
+  long: -106.0713
+};
+
+const locations = [denver, silverthorne];
+
 // Get data once on startup and then update data every 60 mins
-weather.updateWeatherInfo();
+weather.updateWeatherInfo(locations);
 resort.updateSnowInfo();
 traffic.updateTrafficInfo();
 

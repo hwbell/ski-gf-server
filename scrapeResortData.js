@@ -107,7 +107,7 @@ const updateSnowInfo = () => {
   });
 }
 
-updateSnowInfo();
+// updateSnowInfo();
 
 module.exports = {
   updateSnowInfo

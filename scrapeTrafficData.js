@@ -88,7 +88,7 @@ const updateTrafficInfo = () => {
   });
 }
 
-updateTrafficInfo();
+// updateTrafficInfo();
 
 module.exports = {
   updateTrafficInfo

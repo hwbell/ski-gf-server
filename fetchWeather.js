@@ -8,7 +8,7 @@ const lat = coords[0];
 const lon = coords[1];
 
 const updateWeatherInfo = () => {
-  fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=80227&APPID=eef8b0df2136b2a17532672c7ac59717`)
+  fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=39.7392&lon=-104.9848&APPID=${process.env.APPID}`)
              //api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}
   .then(function(response) {
     return response.json();
@@ -19,12 +19,12 @@ const updateWeatherInfo = () => {
   
     var writeData = JSON.stringify(weatherJSON);
 
-    // fs.writeFile(path.join(__dirname, 'public/json/weatherData.json'), writeData, (err) => {
-    //   console.log(`writing weather data to ${path.join(__dirname, 'public/json/weatherData.json')}`)
-    //   if (err) { 
-    //     console.log(`Error writing weather to JSON file: ${err}`);
-    //   }
-    // })
+    fs.writeFile(path.join(__dirname, 'public/json/weatherData.json'), writeData, (err) => {
+      console.log(`writing weather data to ${path.join(__dirname, 'public/json/weatherData.json')}`)
+      if (err) { 
+        console.log(`Error writing weather to JSON file: ${err}`);
+      }
+    })
 
     // write to mongodb instead of fs.writeFile, as fs does not 
     // actually work on heroku.
