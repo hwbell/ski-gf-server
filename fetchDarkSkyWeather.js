@@ -13,7 +13,7 @@ const updateWeatherInfo = (locations) => {
     .then(function (weatherInfo) {
 
 
-      console.log("Silverthorne weather info successfully fetched!"); // Success!
+      console.log(`${location.name} weather info successfully fetched!`); // Success!
       console.log(weatherInfo);
 
       var writeData = JSON.stringify(weatherInfo);
@@ -50,7 +50,7 @@ const updateWeatherInfo = (locations) => {
           if (err) {
             console.log('Unable to insert weather data to SkiGfApp', err);
           } else {
-            console.log(JSON.stringify(result.ops, undefined, 2));
+            //console.log(JSON.stringify(result.ops, undefined, 2));
           }
         });
 

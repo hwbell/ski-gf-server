@@ -5,10 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var weatherPage = require('./routes/weather');
+// import the routes
+var denverWeatherPage = require('./routes/denver-weather');
+var silverthorneWeatherPage = require('./routes/silverthorne-weather');
 var snowPage = require('./routes/snow');
 var trafficPage = require('./routes/traffic');
 
+// import the data gathering functions 
 var weather = require('./fetchDarkSkyWeather.js');
 var resort = require('./scrapeResortData.js')
 var traffic = require('./scrapeTrafficData.js')
@@ -38,7 +41,7 @@ traffic.updateTrafficInfo();
 
 const intervalTime = 60 * 60 * 1000; // 0.5 mins in milliseconds
 let dataInterval = setInterval(() => {
-	weather.updateWeatherInfo();
+	weather.updateWeatherInfo(locations);
 	resort.updateSnowInfo();
 	traffic.updateTrafficInfo();
 }, intervalTime);
@@ -59,7 +62,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // console.log(`__dirname: ${__dirname}`);
 
 
-app.use('/weather', weatherPage);
+app.use('/denver-weather', denverWeatherPage);
+app.use('/silverthorne-weather', silverthorneWeatherPage);
 app.use('/snow', snowPage);
 app.use('/traffic', trafficPage);
 

@@ -29,12 +29,12 @@ const getData = (type, dbCollection, callback) => {
 }
 
 // to test
-data = getData('snow', dbCollection, (data) => {
-  //console.log(typeof(data[data.length-1].data))
-  console.log(`Latest snow data: ${data[data.length-1].data}`)
+// data = getData('snow', dbCollection, (data) => {
+//   //console.log(typeof(data[data.length-1].data))
+//   console.log(`Latest snow data: ${data[data.length-1].data}`)
 
-  return data[data.length-1].data;
-});
+//   return data[data.length-1].data;
+// });
 
 module.exports = {
   getData
