@@ -15,6 +15,7 @@ const updateSnowInfo = () => {
     const browser = await puppeteer.launch({ args: ['--no-sandbox'], headless: true });
     const page = await browser.newPage();
 
+    // keystone scrape
     await page.goto('https://www.keystoneresort.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx');
     await page.click('#forecastTodayContainer');
     await page.waitFor(1000);
@@ -29,6 +30,7 @@ const updateSnowInfo = () => {
 
     });
 
+    // abasin scrape
     await page.goto('https://www.arapahoebasin.com/');
     await page.click('.ab-headerConditions_conditions');
     await page.waitFor(1000);
@@ -43,12 +45,27 @@ const updateSnowInfo = () => {
 
     });
 
+    // opensnow scrape
+    await page.goto('https://opensnow.com/dailysnow/colorado');
+    await page.waitFor(1000);
+    await page.waitForSelector('.post');
+
+    const openSnowOutlook = await page.evaluate(() => {
+      let openSnowToday = document.querySelector('.post').innerText;
+      console.log(openSnowToday)
+      return {
+        openSnowToday: openSnowToday.split('\n')
+      }
+    
+    });
+
     browser.close();
 
     return ({
       timeStamp,
       keystoneWeather,
-      aBasinWeather
+      aBasinWeather,
+      openSnowOutlook
     })
   }
 
