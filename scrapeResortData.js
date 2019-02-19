@@ -19,10 +19,10 @@ const updateSnowInfo = () => {
     await page.goto('https://www.keystoneresort.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx');
     await page.click('#forecastTodayContainer');
     await page.waitFor(1000);
-    await page.waitForSelector('.forecast__today__primary');
+    await page.waitForSelector('.snow_report__metrics');
 
     const keystoneWeather = await page.evaluate(() => {
-      let keystoneToday = document.querySelector('.forecast__today__primary').innerText;
+      let keystoneToday = document.querySelector('.snow_report__metrics').innerText;
 
       return {
         keystoneToday: keystoneToday.split('\n')
