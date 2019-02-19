@@ -12,7 +12,7 @@ const getData = (type, dbCollection, callback) => {
     let dbStr = process.env.MONGODB_URI ? 'heroku_ktdh1smp' : 'SkiGfApp';
     const db = client.db(dbStr);
 
-    db.collection(dbStr).find({ type }).toArray().then((docs) => {
+    db.collection(dbStr).find({ type: type }).toArray().then((docs) => {
       console.log(`Total: ${docs.length} records found`);
       console.log(docs[docs.length-1]);
       
