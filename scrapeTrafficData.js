@@ -35,14 +35,13 @@ const updateTrafficInfo = () => {
     })
   }
 
-  // Once we have the data, save it to a local json file on the server. if 
-  // one is present with the same name, it just gets replaced, so there isnt
-  // a data buildup.
-  
+  // Enter the scraped data into mongoDB
   scrape().then((data) => {
+    console.log('***************************TRAFFIC********************************');
     console.log("Got traffic info from GOI70.com/travel/"); // Success!
 
     var writeData = JSON.stringify(data);
+    console.log(writeData)
 
     const MongoClient = require('mongodb').MongoClient;
 
@@ -50,7 +49,10 @@ const updateTrafficInfo = () => {
       if (err) {
         return console.log('Unable to connect to MongoDB server');
       }
+      // connected to mongoDB
       console.log('Connected to MongoDB server');
+
+      // local vs deployed dbase
       let dbStr = process.env.MONGODB_URI ? 'heroku_ktdh1smp' : 'SkiGfApp';
       const db = client.db(dbStr);
 
@@ -59,9 +61,12 @@ const updateTrafficInfo = () => {
         data: writeData,
       }, (err, result) => {
         if (err) {
+          // something went wrong
           console.log('Unable to insert traffic data to SkiGfApp');
         }
+        // the data was entered!
         console.log(JSON.stringify(result.ops, undefined, 2))
+        console.log('traffic data was entered into mongoDB')
       });
 
       db.collection('SkiGfApp').find().toArray().then((docs) => {
@@ -77,6 +82,8 @@ const updateTrafficInfo = () => {
     });
 
   });
+  console.log('***********************************************************');
+
 }
 
 updateTrafficInfo();

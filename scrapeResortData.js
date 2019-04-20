@@ -15,20 +15,20 @@ const updateSnowInfo = () => {
     const browser = await puppeteer.launch({ args: ['--no-sandbox'], headless: true });
     const page = await browser.newPage();
 
-    // keystone scrape
-    await page.goto('https://www.keystoneresort.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx');
-    await page.click('#forecastTodayContainer');
-    await page.waitFor(1000);
-    await page.waitForSelector('.snow_report__metrics');
+    // // keystone scrape
+    // await page.goto('https://www.keystoneresort.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx');
+    // await page.click('#forecastTodayContainer');
+    // await page.waitFor(1000);
+    // await page.waitForSelector('.snow_report__metrics');
 
-    const keystoneWeather = await page.evaluate(() => {
-      let keystoneToday = document.querySelector('.snow_report__metrics').innerText;
+    // const keystoneWeather = await page.evaluate(() => {
+    //   let keystoneToday = document.querySelector('.snow_report__metrics').innerText;
 
-      return {
-        keystoneToday: keystoneToday.split('\n')
-      }
+    //   return {
+    //     keystoneToday: keystoneToday.split('\n')
+    //   }
 
-    });
+    // });
 
     // abasin scrape
     await page.goto('https://www.arapahoebasin.com/');
@@ -63,7 +63,7 @@ const updateSnowInfo = () => {
 
     return ({
       timeStamp,
-      keystoneWeather,
+      // keystoneWeather,
       aBasinWeather,
       openSnowOutlook
     })
@@ -74,6 +74,7 @@ const updateSnowInfo = () => {
   // a data buildup.
 
   scrape().then((data) => {
+    console.log('***********************************************************');
     console.log("Got snow info from Keystone + A Basin"); // Success!
 
     var writeData = JSON.stringify(data);
@@ -123,6 +124,8 @@ const updateSnowInfo = () => {
     });
 
   });
+  console.log('*****************************SNOW******************************');
+
 }
 
 // updateSnowInfo();
