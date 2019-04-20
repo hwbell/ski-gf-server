@@ -44,15 +44,6 @@ const updateTrafficInfo = () => {
 
     var writeData = JSON.stringify(data);
 
-    // fs.writeFile(path.join(__dirname, 'public/json/trafficData.json'), writeData, (err) => {
-    //   if (err) {
-    //     console.log(err);
-    //   }
-    // });
-
-    // write to mongodb instead of fs.writeFile, as fs does not 
-    // actually work on heroku.
-
     const MongoClient = require('mongodb').MongoClient;
 
     MongoClient.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/SkiGfApp', (err, client) => {
@@ -88,7 +79,7 @@ const updateTrafficInfo = () => {
   });
 }
 
-// updateTrafficInfo();
+updateTrafficInfo();
 
 module.exports = {
   updateTrafficInfo

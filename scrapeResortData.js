@@ -77,7 +77,8 @@ const updateSnowInfo = () => {
     console.log("Got snow info from Keystone + A Basin"); // Success!
 
     var writeData = JSON.stringify(data);
-
+    console.log(writeData)
+    
     // fs.writeFile(path.join(__dirname, 'public/json/snowData.json'), writeData, (err) => {
     //   console.log(`writing snow data to ${path.join(__dirname, 'public/json/snowData.json')}`);
     //   if (err) {
